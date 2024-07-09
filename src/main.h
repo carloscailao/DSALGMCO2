@@ -1,3 +1,6 @@
+#ifndef main_h
+#define main_h
+
 // Libraries here
 #include <stdio.h>
 #include <string.h>
@@ -7,11 +10,12 @@
 #define MAX 100
 // Type String is a character array
 typedef char String[MAX];
+struct Vertex;
 
-typedef struct {
+typedef struct Vertex{
     String id;
     int degree;
-    Vertex *edge[MAX];
+    struct Vertex *edges[MAX];
 } Vertex;
 
 typedef struct {
@@ -25,7 +29,9 @@ typedef struct {
 int getInput();
 
 //Graph
-Vertex *getVertexLoc(Graph graph, String id);
+Vertex *getVertexLoc(Graph *graph, String id);
 Vertex getVertex(Graph graph, String id);
 Vertex initVertex(String id);
-Graph initGraph(FILE *fp);
+Graph *initGraph(FILE *fp);
+
+#endif //main_h

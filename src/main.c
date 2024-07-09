@@ -3,5 +3,7 @@
 #include "graph.c"
 
 int main (void) {
-    printf("Test!");
+    printf("Testing!");
+    getInput();
+    return 0;
 }

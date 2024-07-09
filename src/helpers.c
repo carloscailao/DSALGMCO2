@@ -17,9 +17,11 @@ int getInput() {
         exit(1);
     }
 
-    initGraph(fp);
+    Graph *graph = initGraph(fp);
     fclose(fp);
 
     printf("Input start vertex for the traversal: ");
     scanf("%s", startVertex);
+
+    return 0;
 }
