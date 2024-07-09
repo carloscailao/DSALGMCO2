@@ -4,26 +4,12 @@ Non-traversal related functions go here
 
 #include "main.h"
 
-int getInput() {
-    String filename;
-    String startVertex;
-    
-    printf("Input filename: ");
-    scanf("%99s", filename);
-    
-    FILE *fp = fopen(filename, "r");
-    if (fp == NULL) {
-        printf("%s not found.", filename);
-        exit(1);
+// custom strupr function built to be portable for every compiler
+char *strupr(char *str) {
+    char *orig = str;
+    while (*str) {
+        *str = toupper((unsigned char)*str);
+        str++;
     }
-
-    Graph *graph = initGraph(fp);
-    fclose(fp);
-
-    printGraph(*graph);
-
-    printf("Input start vertex for the traversal: ");
-    scanf("%s", startVertex);
-
-    return 0;
+    return orig;
 }

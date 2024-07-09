@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 // Definitions here
 #define MAX 100
@@ -26,9 +27,10 @@ typedef struct {
 // Insert function prototypes here
 
 //Helpers
-int getInput();
+char *strupr(char *str);
 
 //Graph
+int isVertexInGraph(Graph *graph, String vertexID);
 Vertex *getVertexLoc(Graph *graph, String id);
 Vertex getVertex(Graph graph, String id);
 Vertex initVertex(String id);
