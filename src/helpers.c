@@ -20,6 +20,8 @@ int getInput() {
     Graph *graph = initGraph(fp);
     fclose(fp);
 
+    printGraph(*graph);
+
     printf("Input start vertex for the traversal: ");
     scanf("%s", startVertex);
 

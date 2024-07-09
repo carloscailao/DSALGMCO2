@@ -33,5 +33,6 @@ Vertex *getVertexLoc(Graph *graph, String id);
 Vertex getVertex(Graph graph, String id);
 Vertex initVertex(String id);
 Graph *initGraph(FILE *fp);
+void printGraph(Graph graph);
 
 #endif //main_h

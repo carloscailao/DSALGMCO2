@@ -67,3 +67,15 @@ Graph *initGraph(FILE *fp) {
 
     return newGraph;
 }
+
+void printGraph(Graph graph) {
+    int i, j;
+    printf("Printing graph!\n");
+    for (i = 0; i < graph.nVertices; i++) { // per vertex
+        printf("Source vertex: %s is adjacent to: ", graph.vertices[i].id);
+        for (j = 0; j < graph.vertices[i].degree; j++) {
+            printf("%s, ", graph.vertices[j].id);
+        }
+        printf("\n");
+    }
+}
