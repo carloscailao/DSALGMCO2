@@ -16,6 +16,7 @@ struct Vertex;
 typedef struct Vertex{
     String id;
     int degree;
+    int isVisited;
     struct Vertex *edges[MAX];
 } Vertex;
 

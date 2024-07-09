@@ -8,6 +8,7 @@ void dfs(Graph *graph, String startVertex) {
     while (nVisited < graph->nVertices) { // while not all vertices are visited
         printf("Visiting vertex %d ", startVertexIndex);
         printf("%s ", graph->vertices[startVertexIndex].id);
+        graph->vertices[startVertexIndex].isVisited = 1;
         nVisited++;
     }
 }

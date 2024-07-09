@@ -36,6 +36,7 @@ Vertex initVertex(String id) {
     Vertex newVertex;
     strcpy(newVertex.id, id);
     newVertex.degree = 0;
+    newVertex.isVisited = 0;
     for (int i = 0; i < MAX; i++) {
         newVertex.edges[i] = NULL;
     }
