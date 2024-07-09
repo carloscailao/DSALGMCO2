@@ -26,15 +26,15 @@ typedef struct {
 
 // Insert function prototypes here
 
-//Helpers
-char *strupr(char *str);
-
 //Graph
 int isVertexInGraph(Graph *graph, String vertexID);
 Vertex *getVertexLoc(Graph *graph, String id);
-Vertex getVertex(Graph graph, String id);
+int getVertexIndex(Graph graph, String id);
 Vertex initVertex(String id);
 Graph *initGraph(FILE *fp);
 void printGraph(Graph graph);
+
+//DFS
+void dfs(Graph *graph, String startVertex);
 
 #endif //main_h

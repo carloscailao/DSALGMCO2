@@ -1,6 +1,6 @@
 #include "main.h"
 #include "graph.c"
-#include "helpers.c"
+#include "dfs.c"
 
 int main (void) {
     String filename;
@@ -28,6 +28,7 @@ int main (void) {
     }
 
     // traversals here
+    dfs(graph, startVertex);
 
     free(graph);
 

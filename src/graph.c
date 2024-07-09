@@ -5,7 +5,7 @@ Graph implementation functions go here
 
 int isVertexInGraph(Graph *graph, String vertexID) {
     for (int i = 0; i < graph->nVertices; i++) {
-        if (strcmp(strupr(vertexID), strupr(graph->vertices[i].id)) == 0) {
+        if (strcasecmp(graph->vertices[i].id, vertexID) == 0) {
             return 1;
         }
     }
@@ -22,15 +22,14 @@ Vertex *getVertexLoc(Graph *graph, String id) {
     return NULL;
 }
 
-Vertex getVertex(Graph graph, String id) {
-    int i;
-    for(i = 0; i < graph.nVertices; i++) {
-        if (strcmp(id, graph.vertices[i].id) == 0) {
-            return graph.vertices[i];
+int getVertexIndex(Graph graph, String id) {
+    for (int i = 0; i < graph.nVertices; i++) {
+        printf("Comparing %s with %s\n", graph.vertices[i].id, id);
+        if (strcasecmp(graph.vertices[i].id, id) == 0) {
+            return i;
         }
     }
-    Vertex emptyVertex = {"", 0, {NULL}}; // return empty vertex if not found
-    return emptyVertex;
+    return -1;
 }
 
 Vertex initVertex(String id) {
