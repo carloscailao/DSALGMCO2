@@ -3,8 +3,8 @@
 #include "dfs.c"
 
 int main (void) {
-    String filename;
-    String startVertex;
+    inputField filename;
+    inputField startVertex;
     
     printf("Input filename: ");
     scanf("%99s", filename);

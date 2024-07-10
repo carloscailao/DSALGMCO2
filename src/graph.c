@@ -34,6 +34,7 @@ int getVertexIndex(Graph *graph, String id) {
 
 Vertex *initVertex(String id) {
     Vertex *newVertex = malloc(sizeof(Vertex));
+    newVertex->id = malloc(strlen(id));
     strcpy(newVertex->id, id);
     newVertex->degree = 0;
     newVertex->isVisited = 0;
@@ -47,7 +48,7 @@ Graph *initGraph(FILE *fp) {
     int nVertices = 0;
     int row = 0;
     Vertex *vertexLoc;
-    String buffer;
+    inputField buffer;
     Graph *newGraph = malloc(sizeof(Graph));
 
     fscanf(fp, "%d", &nVertices); // get nVertices

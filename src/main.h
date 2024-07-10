@@ -9,8 +9,11 @@
 
 // Definitions here
 #define MAX 100
-// Type String is a character array
-typedef char String[MAX];
+#define MAX_CHAR 50
+// Type String can be dynamically allocated
+typedef char *String;
+// Type inputField is statically allocated 
+typedef char inputField[MAX_CHAR];
 struct Vertex;
 
 typedef struct Vertex{
@@ -27,7 +30,7 @@ typedef struct {
 
 typedef struct {
     int top;
-    Vertex vertices[MAX];
+    Vertex *vertices[MAX];
 } StackOfVertices;
 
 // Insert function prototypes here
@@ -42,5 +45,10 @@ void printGraph(Graph *graph);
 
 //DFS
 void dfs(Graph *graph, String startVertex);
+StackOfVertices *initStackOfVertices();
+void pushVertex(StackOfVertices *stack, Vertex *vertex);
+Vertex *popVertex(StackOfVertices *stack);
+int isStackFull(StackOfVertices *stack);
+int isStackEmpty(StackOfVertices *stack);
 
 #endif //main_h
