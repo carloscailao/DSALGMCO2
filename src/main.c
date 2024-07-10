@@ -28,7 +28,7 @@ int main (void) {
     }
 
     // traversals here
-    // dfs(graph, startVertex);
+    dfs(graph, startVertex);
 
     free(graph);
 

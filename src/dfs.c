@@ -3,22 +3,24 @@
 
 void dfs(Graph *graph, String startVertex) {
     printf("DFS Initialized!\n");
-    int startVertexIndex = getVertexIndex(graph, startVertex);
-    int nVisited = 0;
-    printf("nVertices: %d\n", graph->nVertices);
-    while (nVisited < graph->nVertices) { // while not all vertices are visited
-        printf("Visiting vertex %d ", startVertexIndex);
-        printf("%s ", graph->vertices[startVertexIndex]->id);
-        graph->vertices[startVertexIndex]->isVisited = 1;
-        for (int i = 0; i < graph->vertices[startVertexIndex]->degree; i++) { // per adjacent vertex 
-            if (!graph->vertices[startVertexIndex]->edges[i]->isVisited) {
-                
-            }
-        }
-        nVisited++;
-    }
+    traverse(graph, getVertexLoc(graph, startVertex));
 }
 
+void traverse(Graph *graph, Vertex *vertex) {
+    // Mark the current vertex as visited
+    vertex->isVisited = 1;
+    printf("%s ", vertex->id);
+
+    // Recur for all the vertices adjacent to this vertex
+
+    // TO DO: COMPARISON OF MULTIPLE NEIGHBORS
+    for (int i = 0; i < vertex->degree; i++) {
+        if (vertex->edges[i] != NULL && !vertex->edges[i]->isVisited) {
+            traverse(graph, vertex->edges[i]);
+        }
+    }
+}
+/*
 StackOfVertices *initStackOfVertices() {
     StackOfVertices *newStack = malloc(sizeof(StackOfVertices));
     newStack->top = -1;
@@ -61,3 +63,4 @@ int isStackEmpty(StackOfVertices *stack) {
     }
     return 0;
 }
+*/

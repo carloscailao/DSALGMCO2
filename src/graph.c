@@ -15,7 +15,7 @@ int isVertexInGraph(Graph *graph, String vertexID) {
 Vertex *getVertexLoc(Graph *graph, String id) {
     int i;
     for (i = 0; i < graph->nVertices; i++) {
-        if (strcmp(id, graph->vertices[i]->id) == 0) {
+        if (strcasecmp(id, graph->vertices[i]->id) == 0) {
             return graph->vertices[i];
         }
     }

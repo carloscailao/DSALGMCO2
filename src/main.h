@@ -45,10 +45,12 @@ void printGraph(Graph *graph);
 
 //DFS
 void dfs(Graph *graph, String startVertex);
+void traverse(Graph *graph, Vertex *vertex);
+/*
 StackOfVertices *initStackOfVertices();
 void pushVertex(StackOfVertices *stack, Vertex *vertex);
 Vertex *popVertex(StackOfVertices *stack);
 int isStackFull(StackOfVertices *stack);
 int isStackEmpty(StackOfVertices *stack);
-
+*/
 #endif //main_h
