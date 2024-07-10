@@ -32,12 +32,14 @@ int getVertexIndex(Graph *graph, String id) {
     return -1;
 }
 
-Vertex *initVertex(String id) {
+Vertex *initVertex(String id, int degree) {
     Vertex *newVertex = malloc(sizeof(Vertex));
+    newVertex->id = malloc(strlen(id) + 1);
     strcpy(newVertex->id, id);
-    newVertex->degree = 0;
+    newVertex->degree = degree;
     newVertex->isVisited = 0;
-    for (int i = 0; i < MAX; i++) {
+    newVertex->edges = malloc(degree * sizeof(Vertex *));
+    for (int i = 0; i < degree; i++) {
         newVertex->edges[i] = NULL;
     }
     return newVertex;
@@ -46,27 +48,48 @@ Vertex *initVertex(String id) {
 Graph *initGraph(FILE *fp) {
     int nVertices = 0;
     int row = 0;
+    int nAdjacency = 0;
+    int tempDegree = 0;
+    inputField sourceVertex;
     Vertex *vertexLoc;
-    String buffer;
+    inputField buffer;
     Graph *newGraph = malloc(sizeof(Graph));
 
     fscanf(fp, "%d", &nVertices); // get nVertices
     newGraph->nVertices = nVertices;
+    printf("nVertices initialized to %d\n", newGraph->nVertices);
+    newGraph->vertices = malloc(nVertices * sizeof(Vertex *));
+    printf("Size of vertex * is %d\n", (int)sizeof(Vertex *));
+    printf("Vertices pointer array memory allocated %d\n", nVertices * (int)sizeof(Vertex *));
 
-    // initialize vertices
+    // initialize vertices and allocate memory for edges
 
     for (row = 0; row < nVertices; row++) { // per vertex (per row of input)
-        fscanf(fp, "%s", buffer); // get token
-        newGraph->vertices[row] = initVertex(buffer); // initialize first vertex of row - this is the source vertex
-        printf("Vertex %s has been stored in Graph vertices[%d]\n", buffer, row);
+        tempDegree = 0;
+        printf("Initializing vertices\n");
+        fscanf(fp, "%s", sourceVertex); // get token
+        printf("%s in sourceVertex\n", sourceVertex);
         while (fscanf(fp, "%s", buffer) == 1 ) { // while row has not ended, parse through vertex
             if (strcmp(buffer, "-1") == 0) {
                 break; // End of adjacency list
             }
+            // for dynamic allocation of edges based on vertex degree
+            tempDegree++;
+            printf("Scanned degree of %s is %d\n", sourceVertex, tempDegree);
         }
+        newGraph->vertices[row] = initVertex(sourceVertex, tempDegree);
+        printf("Vertex %s initialized in graph vertices[%d]\n", sourceVertex, row);
     }
 
     fseek(fp, 1, SEEK_SET); // return to start of vertices (offset by 1 for nVertices)
+
+    // allocate memory for edges based on degree
+    for (row = 0; row < nVertices; row++) {
+        if (newGraph->vertices[row]->degree > 0) { // if vertex has edges
+            newGraph->vertices[row]->edges = malloc(newGraph->vertices[row]->degree * sizeof(Vertex *));
+            // allocate memory for vertex pointers in edges
+        }
+    }
 
     // initialize adjacencies
 
@@ -74,20 +97,15 @@ Graph *initGraph(FILE *fp) {
         printf("Analyzing adjacency\n");
         fscanf(fp, "%s", buffer); // read through source vertex
         printf("%s in buffer\n", buffer);
-        while (fscanf(fp, "%s", buffer) == 1 ) { // while row has not ended, scan for vertex
+        for (nAdjacency = 0; nAdjacency < newGraph->vertices[row]->degree; nAdjacency++) {
             if (strcmp(buffer, "-1") == 0) {
                 break; // End of adjacency list
             }
             vertexLoc = getVertexLoc(newGraph, buffer);
             if (vertexLoc != NULL) {
-                newGraph->vertices[row]->edges[newGraph->vertices[row]->degree] = vertexLoc;
-                printf("%s became adjacent to %s!\n",  newGraph->vertices[row]->id, vertexLoc->id);
-                newGraph->vertices[row]->degree++;
-                // at source vertex, access edge based on current degree of vertex, assign adjacent vertexLoc to vertex pointer array edges
-                // at the end of the while loop, all addresses of adjacent vertices of source vertex will be in edges array of source vertex
+                newGraph->vertices[row]->edges[nAdjacency] = vertexLoc;
             }
-        }
-        // at the end of the for loop, all adjacencies of all source vertices will be placed in corresponding edges array of source vertices
+       }
     }
 
     return newGraph;
