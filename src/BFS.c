@@ -35,10 +35,10 @@ void enqueue(Queue *q, Vertex *v){
 	}
 	else{
 		if (q->front == -1)
-        q->front = 0;
-    q->rear++;
-    q->elements[q->rear] = v;
-    q->size++;
+     	   q->front = 0;
+	    q->rear++;
+	    q->elements[q->rear] = v;
+	    q->size++;
 	// printf("Enqueued element: %d\n", val);
 	}
 }
@@ -59,15 +59,17 @@ Vertex *dequeue(Queue *q){
 	}
 }
 
-void BFS(Graph *graph, Vertex *start){
+void BFS(Graph *graph, String start){
 	Queue q;
     initializeQueue(&q);
+    printf("BFS is initialized\n");
 
+	Vertex *startVertex = getVertexLoc(graph, start);
     // Enqueue the source vertex
-    start->isVisited = 1;
-    enqueue(&q, start);
+    startVertex->isVisited = 1;
+    enqueue(&q, startVertex);
 
-    // printf("BFS Traversal starting from vertex %s:\n", start->id);
+     printf("BFS Traversal starting from vertex %s:\n", startVertex->id);
 	
 	while (!isEmpty(&q)) {
         Vertex *current = dequeue(&q);
@@ -83,8 +85,4 @@ void BFS(Graph *graph, Vertex *start){
         }
     }
     printf("\n");
-}
-
-void BFSmain(){
-	BFS(g, g->vertices[0]);
 }
