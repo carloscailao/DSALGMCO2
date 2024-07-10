@@ -5,7 +5,7 @@ Graph implementation functions go here
 
 int isVertexInGraph(Graph *graph, String vertexID) {
     for (int i = 0; i < graph->nVertices; i++) {
-        if (strcasecmp(graph->vertices[i].id, vertexID) == 0) {
+        if (strcasecmp(graph->vertices[i]->id, vertexID) == 0) {
             return 1;
         }
     }
@@ -15,30 +15,30 @@ int isVertexInGraph(Graph *graph, String vertexID) {
 Vertex *getVertexLoc(Graph *graph, String id) {
     int i;
     for (i = 0; i < graph->nVertices; i++) {
-        if (strcmp(id, graph->vertices[i].id) == 0) {
-            return &graph->vertices[i];
+        if (strcmp(id, graph->vertices[i]->id) == 0) {
+            return graph->vertices[i];
         }
     }
     return NULL;
 }
 
-int getVertexIndex(Graph graph, String id) {
-    for (int i = 0; i < graph.nVertices; i++) {
-        printf("Comparing %s with %s\n", graph.vertices[i].id, id);
-        if (strcasecmp(graph.vertices[i].id, id) == 0) {
+int getVertexIndex(Graph *graph, String id) {
+    for (int i = 0; i < graph->nVertices; i++) {
+        printf("Comparing %s with %s\n", graph->vertices[i]->id, id);
+        if (strcasecmp(graph->vertices[i]->id, id) == 0) {
             return i;
         }
     }
     return -1;
 }
 
-Vertex initVertex(String id) {
-    Vertex newVertex;
-    strcpy(newVertex.id, id);
-    newVertex.degree = 0;
-    newVertex.isVisited = 0;
+Vertex *initVertex(String id) {
+    Vertex *newVertex = malloc(sizeof(Vertex));
+    strcpy(newVertex->id, id);
+    newVertex->degree = 0;
+    newVertex->isVisited = 0;
     for (int i = 0; i < MAX; i++) {
-        newVertex.edges[i] = NULL;
+        newVertex->edges[i] = NULL;
     }
     return newVertex;
 }
@@ -80,9 +80,9 @@ Graph *initGraph(FILE *fp) {
             }
             vertexLoc = getVertexLoc(newGraph, buffer);
             if (vertexLoc != NULL) {
-                newGraph->vertices[row].edges[newGraph->vertices[row].degree] = vertexLoc;
-                printf("%s became adjacent to %s!\n",  newGraph->vertices[row].id, vertexLoc->id);
-                newGraph->vertices[row].degree++;
+                newGraph->vertices[row]->edges[newGraph->vertices[row]->degree] = vertexLoc;
+                printf("%s became adjacent to %s!\n",  newGraph->vertices[row]->id, vertexLoc->id);
+                newGraph->vertices[row]->degree++;
                 // at source vertex, access edge based on current degree of vertex, assign adjacent vertexLoc to vertex pointer array edges
                 // at the end of the while loop, all addresses of adjacent vertices of source vertex will be in edges array of source vertex
             }
@@ -93,14 +93,14 @@ Graph *initGraph(FILE *fp) {
     return newGraph;
 }
 
-void printGraph(Graph graph) {
+void printGraph(Graph *graph) {
     int i, j;
     printf("Printing graph!\n");
-    for (i = 0; i < graph.nVertices; i++) { // per vertex
-        printf("Source vertex: %s is adjacent to: ", graph.vertices[i].id);
-        for (j = 0; j < graph.vertices[i].degree; j++) { // per edge of vertex
-            if (graph.vertices[i].edges[j] != NULL) {
-                printf("%s, ", graph.vertices[i].edges[j]->id);
+    for (i = 0; i < graph->nVertices; i++) { // per vertex
+        printf("Source vertex: %s is adjacent to: ", graph->vertices[i]->id);
+        for (j = 0; j < graph->vertices[i]->degree; j++) { // per edge of vertex
+            if (graph->vertices[i]->edges[j] != NULL) {
+                printf("%s, ", graph->vertices[i]->edges[j]->id);
             }
         }
         printf("\n");

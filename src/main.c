@@ -18,7 +18,7 @@ int main (void) {
     Graph *graph = initGraph(fp);
     fclose(fp);
 
-    printGraph(*graph);
+    printGraph(graph);
 
     printf("Input start vertex for the traversal: ");
     scanf("%s", startVertex);
@@ -28,7 +28,7 @@ int main (void) {
     }
 
     // traversals here
-    dfs(graph, startVertex);
+    // dfs(graph, startVertex);
 
     free(graph);
 

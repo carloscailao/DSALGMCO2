@@ -22,18 +22,23 @@ typedef struct Vertex{
 
 typedef struct {
     int nVertices;
-    Vertex vertices[MAX];
+    Vertex *vertices[MAX];
 } Graph;
+
+typedef struct {
+    int top;
+    Vertex vertices[MAX];
+} StackOfVertices;
 
 // Insert function prototypes here
 
 //Graph
 int isVertexInGraph(Graph *graph, String vertexID);
 Vertex *getVertexLoc(Graph *graph, String id);
-int getVertexIndex(Graph graph, String id);
-Vertex initVertex(String id);
+int getVertexIndex(Graph *graph, String id);
+Vertex *initVertex(String id);
 Graph *initGraph(FILE *fp);
-void printGraph(Graph graph);
+void printGraph(Graph *graph);
 
 //DFS
 void dfs(Graph *graph, String startVertex);
