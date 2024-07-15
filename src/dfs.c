@@ -1,33 +1,72 @@
-
 #include "main.h"
-
 void dfs(Graph *graph, String startVertex) {
     printf("DFS Initialized!\n");
     traverse(graph, getVertexLoc(graph, startVertex));
 }
 
-void traverse(Graph *graph, Vertex *vertex) {
-    // Mark the current vertex as visited
-    vertex->isVisited = 1;
-    printf("%s ", vertex->id);
+void traverse(Graph *graph, Vertex *startVertex) {
+    StackOfVertices *stack = initStackOfVertices(graph->nVertices);
+    pushVertex(stack, startVertex);
 
-    // Recur for all the vertices adjacent to this vertex
+    while (!isStackEmpty(stack)) {
+        Vertex *currVertex = popVertex(stack);
 
-    // TO DO: COMPARISON OF MULTIPLE NEIGHBORS
-    for (int i = 0; i < vertex->degree; i++) {
-        if (vertex->edges[i] != NULL && !vertex->edges[i]->isVisited) {
-            traverse(graph, vertex->edges[i]);
+        if (!currVertex->isVisited) {
+            // Mark the current vertex as visited
+            currVertex->isVisited = 1;
+            printf("%s ", currVertex->id);
+
+            // Sort neighbors of current vertex
+            Vertex **sortedNeighbors = sortNeighbors(currVertex);
+
+            // Push neighbors to the stack
+            for (int i = currVertex->degree - 1; i >= 0; i--) {
+                if (!sortedNeighbors[i]->isVisited) {
+                    pushVertex(stack, sortedNeighbors[i]);
+                }
+            }
+
+            // Free the allocated memory for sortedNeighbors
+            free(sortedNeighbors);
         }
     }
+
+    // Clean up the stack
+    freeStackOfVertices(stack);
 }
-/*
-StackOfVertices *initStackOfVertices() {
+
+StackOfVertices *initStackOfVertices(int nVertices) {
     StackOfVertices *newStack = malloc(sizeof(StackOfVertices));
     newStack->top = -1;
-    for (int i = 0; i < MAX; i++) {
-        newStack->vertices[i] = NULL; // Initialize all stack elements to NULL
-    }
+    newStack->vertices = malloc(nVertices * sizeof(Vertex *));
+    newStack->capacity = nVertices;  // Store the capacity of the stack
     return newStack;
+}
+
+Vertex **sortNeighbors(Vertex *vertex) {
+    int degree = vertex->degree;
+    Vertex **tempArr = (Vertex **)malloc(degree * sizeof(Vertex *));
+    int i;
+
+    // Copy the original array of vertex pointers to tempArr
+    for (i = 0; i < degree; i++) {
+        tempArr[i] = vertex->edges[i];
+    }
+
+    // Sort the array using selection sort
+    for (i = 0; i < degree - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < degree; j++) {
+            if (strcasecmp(tempArr[j]->id, tempArr[minIndex]->id) < 0) {
+                minIndex = j;
+            }
+        }
+        Vertex *temp = tempArr[minIndex];
+        tempArr[minIndex] = tempArr[i];
+        tempArr[i] = temp;
+    }
+
+    return tempArr;
 }
 
 void pushVertex(StackOfVertices *stack, Vertex *vertex) {
@@ -35,32 +74,26 @@ void pushVertex(StackOfVertices *stack, Vertex *vertex) {
         printf("Stack overflow on DFS stack\n");
         return;
     }
-    stack->top++;
-    stack->vertices[stack->top] = vertex;
-    printf("%s pushed at stack top [%d]", vertex->id, stack->top);
+    stack->vertices[++stack->top] = vertex;
 }
 
 Vertex *popVertex(StackOfVertices *stack) {
-    Vertex *emptyVertex = malloc(sizeof(Vertex));
-    emptyVertex = initVertex("emptyStack");
-    if(isStackEmpty(stack)) {
+    if (isStackEmpty(stack)) {
         printf("Stack underflow on DFS stack\n");
-        return emptyVertex;
+        return NULL;
     }
-    return stack->vertices[stack->top];
+    return stack->vertices[stack->top--];
 }
 
 int isStackFull(StackOfVertices *stack) {
-    if (stack->top == MAX - 1) {
-        return 1;
-    }
-    return 0;
+    return stack->top == stack->capacity - 1;
 }
 
 int isStackEmpty(StackOfVertices *stack) {
-    if (stack->top == -1) {
-        return 1;
-    }
-    return 0;
+    return stack->top == -1;
 }
-*/
+
+void freeStackOfVertices(StackOfVertices *stack) {
+    free(stack->vertices);
+    free(stack);
+}
