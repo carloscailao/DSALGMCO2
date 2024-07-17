@@ -95,11 +95,10 @@ Graph *initGraph(FILE *fp) {
 }
 
 void printGraph(Graph *graph) {
-    int i, j;
     printf("Printing graph!\n");
-    for (i = 0; i < graph->nVertices; i++) { // per vertex
+    for (int i = 0; i < graph->nVertices; i++) { // per vertex
         printf("Source vertex: %s is adjacent to: ", graph->vertices[i]->id);
-        for (j = 0; j < graph->vertices[i]->degree; j++) { // per edge of vertex
+        for (int j = 0; j < graph->vertices[i]->degree; j++) { // per edge of vertex
             if (graph->vertices[i]->edges[j] != NULL) {
                 printf("%s, ", graph->vertices[i]->edges[j]->id);
             }

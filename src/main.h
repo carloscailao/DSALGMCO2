@@ -30,7 +30,8 @@ typedef struct {
 
 typedef struct {
     int top;
-    Vertex *vertices[MAX];
+    Vertex **vertices;
+    int capacity;
 } StackOfVertices;
 
 // Insert function prototypes here
@@ -45,12 +46,13 @@ void printGraph(Graph *graph);
 
 //DFS
 void dfs(Graph *graph, String startVertex);
-void traverse(Graph *graph, Vertex *vertex);
-/*
-StackOfVertices *initStackOfVertices();
+void traverse(Graph *graph, Vertex *startVertex);
+StackOfVertices *initStackOfVertices(int nVertices);
+Vertex **sortNeighbors(Vertex *vertex);
 void pushVertex(StackOfVertices *stack, Vertex *vertex);
 Vertex *popVertex(StackOfVertices *stack);
 int isStackFull(StackOfVertices *stack);
 int isStackEmpty(StackOfVertices *stack);
-*/
+void freeStackOfVertices(StackOfVertices *stack);
+
 #endif //main_h
