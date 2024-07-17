@@ -15,7 +15,7 @@ void initializeQueue(Queue *q){
 }
 
 int isEmpty(Queue *q){
-	if(q->rear==q->front){
+	if(q->front==-1 && q->rear==-1){
 		return 1;
 	}
 	return 0;
