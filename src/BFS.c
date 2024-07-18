@@ -76,38 +76,47 @@ Vertex **sortAdjacent(Vertex *vertex){
             }
         }
         
+        //printf("SORT minIndex %d\n", minIndex);
+        
         Vertex *temp = tempArr[minIndex];
         tempArr[minIndex] = tempArr[i];
         tempArr[i] = temp;
+        
+        //printf("SORT ID %s\n", temp->id);
     }
+    
+    /*
+    for(i=0; i< degree; i++){
+    	printf("[sorting] %s ", tempArr[i]->id);
+	}
+	printf("\n");
+    */
     return tempArr;
 }
 
-void BFS(Graph *graph, String start){
+void BFS(Graph *graph, String startID){
 	Queue q;
     initializeQueue(&q);
     printf("BFS is initialized\n");
 
-	Vertex *startVertex = getVertexLoc(graph, start);
+	Vertex *startVertex = getVertexLoc(graph, startID);
     // Enqueue the source vertex
-    startVertex->isVisited = 1;
     enqueue(&q, startVertex);
 
-     printf("BFS Traversal starting from vertex %s:\n", startVertex->id);
+    printf("BFS Traversal starting from vertex %s:\n", startVertex->id);
 	
 	while (!isEmpty(&q)){
         Vertex *current = dequeue(&q);
-        
+		        
 		if(!current->isVisited){
 			current->isVisited = 1;
 			printf("%s ", current->id);
 			
 			Vertex **sortedAdjacent = sortAdjacent(current);
 
-	        for (int i = current->degree - 1; i >= 0; i--){
+	        for (int i = 0; i <= current->degree - 1; i++){
 	            //Vertex *adjacent = current->edges[i];
 	            if (!sortedAdjacent[i]->isVisited){
-	                //adjacent->isVisited = 1;
 	                enqueue(&q, sortedAdjacent[i]);
 	            }
 			}
