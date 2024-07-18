@@ -29,6 +29,11 @@ typedef struct {
 } Graph;
 
 typedef struct {
+	int size, front, rear;
+	Vertex *elements[MAX];
+} Queue;
+
+typedef struct {
     int top;
     Vertex **vertices;
     int capacity;
@@ -43,10 +48,21 @@ int getVertexIndex(Graph *graph, String id);
 Vertex *initVertex(String id);
 Graph *initGraph(FILE *fp);
 void printGraph(Graph *graph);
+void resetVisited(Graph *graph);
+void printGraphDegree(FILE *fp, Graph *graph);
+
+//BFS 
+int isEmpty(Queue *q);
+int isFull(Queue *q);
+void enqueue(Queue *q, Vertex *v);
+Vertex *dequeue(Queue *q);
+Vertex **sortAdjacent(Vertex *vertex);
+void BFS(FILE *fp, Graph *graph, String startID);
+
 
 //DFS
-void dfs(Graph *graph, String startVertex);
-void traverse(Graph *graph, Vertex *startVertex);
+void dfs(FILE *fp, Graph *graph, String startVertex);
+void traverse(FILE *fp, Graph *graph, Vertex *startVertex);
 StackOfVertices *initStackOfVertices(int nVertices);
 Vertex **sortNeighbors(Vertex *vertex);
 void pushVertex(StackOfVertices *stack, Vertex *vertex);

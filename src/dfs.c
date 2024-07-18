@@ -1,10 +1,11 @@
 #include "main.h"
-void dfs(Graph *graph, String startVertex) {
-    printf("DFS Initialized!\n");
-    traverse(graph, getVertexLoc(graph, startVertex));
+void dfs(FILE *fp, Graph *graph, String startVertex) {
+    //printf("DFS Initialized!\n");
+    fprintf(fp, "\n\n"); // output file formatting
+    traverse(fp, graph, getVertexLoc(graph, startVertex));
 }
 
-void traverse(Graph *graph, Vertex *startVertex) {
+void traverse(FILE *fp, Graph *graph, Vertex *startVertex) {
     StackOfVertices *stack = initStackOfVertices(graph->nVertices);
     pushVertex(stack, startVertex);
 
@@ -14,7 +15,7 @@ void traverse(Graph *graph, Vertex *startVertex) {
         if (!currVertex->isVisited) {
             // Mark the current vertex as visited
             currVertex->isVisited = 1;
-            printf("%s ", currVertex->id);
+            fprintf(fp, "%s ", currVertex->id);
 
             // Sort neighbors of current vertex
             Vertex **sortedNeighbors = sortNeighbors(currVertex);

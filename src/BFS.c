@@ -2,12 +2,6 @@
 
 #include "main.h"
 
-// transfer this in main.h
-typedef struct {
-	int size, front, rear;
-	Vertex *elements[MAX];
-} Queue;
-
 void initializeQueue(Queue *q){
 	q->size = 0;
 	q->front = -1;
@@ -94,23 +88,24 @@ Vertex **sortAdjacent(Vertex *vertex){
     return tempArr;
 }
 
-void BFS(Graph *graph, String startID){
+void BFS(FILE *fp, Graph *graph, String startID){
 	Queue q;
     initializeQueue(&q);
-    printf("BFS is initialized\n");
+    //printf("BFS is initialized\n");
+	fprintf(fp, "\n"); // output file formatting
 
 	Vertex *startVertex = getVertexLoc(graph, startID);
     // Enqueue the source vertex
     enqueue(&q, startVertex);
 
-    printf("BFS Traversal starting from vertex %s:\n", startVertex->id);
+    //printf("BFS Traversal starting from vertex %s:\n", startVertex->id);
 	
 	while (!isEmpty(&q)){
         Vertex *current = dequeue(&q);
 		        
 		if(!current->isVisited){
 			current->isVisited = 1;
-			printf("%s ", current->id);
+			fprintf(fp, "%s ", current->id);
 			
 			Vertex **sortedAdjacent = sortAdjacent(current);
 
@@ -123,5 +118,5 @@ void BFS(Graph *graph, String startID){
 			free(sortedAdjacent);
         }
     }
-    printf("\n");
+    //printf("\n");
 }

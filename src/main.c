@@ -1,6 +1,7 @@
 #include "main.h"
 #include "graph.c"
 #include "dfs.c"
+#include "BFS.c"
 
 int main (void) {
     inputField filename;
@@ -18,7 +19,7 @@ int main (void) {
     Graph *graph = initGraph(fp);
     fclose(fp);
 
-    printGraph(graph);
+    //printGraph(graph);
 
     printf("Input start vertex for the traversal: ");
     scanf("%s", startVertex);
@@ -27,8 +28,16 @@ int main (void) {
         exit(1);
     }
 
+    fp = fopen("TRAVERSAL.txt", "w");
+
+    // Graph printing with degree
+    printGraphDegree(fp, graph);
     // traversals here
-    dfs(graph, startVertex);
+    BFS(fp, graph, startVertex);
+    resetVisited(graph);
+    dfs(fp, graph, startVertex);
+
+    fclose(fp);
 
     free(graph);
 

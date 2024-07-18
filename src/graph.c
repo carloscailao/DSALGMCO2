@@ -24,7 +24,7 @@ Vertex *getVertexLoc(Graph *graph, String id) {
 
 int getVertexIndex(Graph *graph, String id) {
     for (int i = 0; i < graph->nVertices; i++) {
-        printf("Comparing %s with %s\n", graph->vertices[i]->id, id);
+        //printf("Comparing %s with %s\n", graph->vertices[i]->id, id);
         if (strcasecmp(graph->vertices[i]->id, id) == 0) {
             return i;
         }
@@ -59,7 +59,7 @@ Graph *initGraph(FILE *fp) {
     for (row = 0; row < nVertices; row++) { // per vertex (per row of input)
         fscanf(fp, "%s", buffer); // get token
         newGraph->vertices[row] = initVertex(buffer); // initialize first vertex of row - this is the source vertex
-        printf("Vertex %s has been stored in Graph vertices[%d]\n", buffer, row);
+        //printf("Vertex %s has been stored in Graph vertices[%d]\n", buffer, row);
         while (fscanf(fp, "%s", buffer) == 1 ) { // while row has not ended, parse through vertex
             if (strcmp(buffer, "-1") == 0) {
                 break; // End of adjacency list
@@ -72,9 +72,9 @@ Graph *initGraph(FILE *fp) {
     // initialize adjacencies
 
     for (row = 0; row < nVertices; row++) { // per row
-        printf("Analyzing adjacency\n");
+        //printf("Analyzing adjacency\n");
         fscanf(fp, "%s", buffer); // read through source vertex
-        printf("%s in buffer\n", buffer);
+        //printf("%s in buffer\n", buffer);
         while (fscanf(fp, "%s", buffer) == 1 ) { // while row has not ended, scan for vertex
             if (strcmp(buffer, "-1") == 0) {
                 break; // End of adjacency list
@@ -82,7 +82,7 @@ Graph *initGraph(FILE *fp) {
             vertexLoc = getVertexLoc(newGraph, buffer);
             if (vertexLoc != NULL) {
                 newGraph->vertices[row]->edges[newGraph->vertices[row]->degree] = vertexLoc;
-                printf("%s became adjacent to %s!\n",  newGraph->vertices[row]->id, vertexLoc->id);
+                //printf("%s became adjacent to %s!\n",  newGraph->vertices[row]->id, vertexLoc->id);
                 newGraph->vertices[row]->degree++;
                 // at source vertex, access edge based on current degree of vertex, assign adjacent vertexLoc to vertex pointer array edges
                 // at the end of the while loop, all addresses of adjacent vertices of source vertex will be in edges array of source vertex
@@ -104,5 +104,28 @@ void printGraph(Graph *graph) {
             }
         }
         printf("\n");
+    }
+}
+
+void resetVisited(Graph *graph) {
+	for (int i = 0; i < graph->nVertices; i++) { // per vertex
+		graph->vertices[i]->isVisited = 0; // reset isVisited to 0
+	}
+}
+
+void printGraphDegree(FILE *fp, Graph *graph) {
+    int longestStrlen = 0;
+
+    // First loop to find the longest ID length
+    for (int i = 0; i < graph->nVertices; i++) {
+        int len = strlen(graph->vertices[i]->id);
+        if (len > longestStrlen) {
+            longestStrlen = len;
+        }
+    }
+
+    // Second loop to print the degrees aligned
+    for (int i = 0; i < graph->nVertices; i++) {
+        fprintf(fp, "%-*s %d\n", longestStrlen, graph->vertices[i]->id, graph->vertices[i]->degree);
     }
 }
