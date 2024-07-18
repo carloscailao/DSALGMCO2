@@ -1,0 +1,13 @@
+4OS           2
+The1975       4
+ArcticMonkeys 2
+Bleachers     2
+Wallows       4
+21Pilots      3
+CAS           4
+Radiohead     4
+BROCKHAMPTON  1
+
+The1975 4OS ArcticMonkeys Bleachers CAS Wallows 21Pilots Radiohead BROCKHAMPTON 
+
+The1975 4OS Wallows 21Pilots CAS ArcticMonkeys Radiohead BROCKHAMPTON Bleachers 

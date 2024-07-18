@@ -28,7 +28,7 @@ int main (void) {
         exit(1);
     }
 
-    fp = fopen("TRAVERSAL.txt", "w");
+    fp = fopen("TRAVERSALS.TXT", "w");
 
     // Graph printing with degree
     printGraphDegree(fp, graph);
