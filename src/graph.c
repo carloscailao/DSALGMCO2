@@ -165,6 +165,6 @@ void generateGraphDotFile(Graph *graph, const char *filename) {
     fprintf(fp, "}\n");
     fclose(fp);
 
-    printf("Graph DOT file \"%s\" has been generated.\n", filename);
+    //printf("Graph DOT file \"%s\" has been generated.\n", filename);
 }
 

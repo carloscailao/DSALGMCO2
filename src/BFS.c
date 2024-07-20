@@ -170,6 +170,6 @@ void BFS(FILE *fp, Graph *graph, String startID, const char *filename) {
     fprintf(fp1, "}\n");
     fclose(fp1);
     free(tempVisited);
-    printf("Graph DOT file \"%s\" has been generated.\n", filename);
+    //printf("Graph DOT file \"%s\" has been generated.\n", filename);
 }
 
