@@ -56,7 +56,7 @@ Vertex *dequeue(Queue *q){
 Vertex **sortAdjacent(Vertex *vertex){
     int degree = vertex->degree;
     Vertex **tempArr = (Vertex **)malloc(degree * sizeof(Vertex *));
-    int i;
+    int i,j;
 
     for (i=0; i<degree; i++){
         tempArr[i] = vertex->edges[i];
@@ -64,7 +64,7 @@ Vertex **sortAdjacent(Vertex *vertex){
 
     for (i=0; i < degree-1; i++){
         int minIndex = i;
-        for (int j=i+1; j<degree; j++){
+        for (j=i+1; j<degree; j++){
             if (strcasecmp(tempArr[j]->id, tempArr[minIndex]->id) < 0){
                 minIndex = j;
             }
@@ -88,35 +88,88 @@ Vertex **sortAdjacent(Vertex *vertex){
     return tempArr;
 }
 
-void BFS(FILE *fp, Graph *graph, String startID){
-	Queue q;
+void BFS(FILE *fp, Graph *graph, String startID, const char *filename) {
+    Queue q;
     initializeQueue(&q);
-    //printf("BFS is initialized\n");
-	fprintf(fp, "\n"); // output file formatting
+    int i, j;
+    FILE *fp1;
+    fp1 = fopen(filename, "w");
+    if (fp1 == NULL) {
+        perror("Failed to open file");
+        return;
+    }
+    fprintf(fp1, "digraph MyGraph {\n");
+    fprintf(fp1, "  node [shape=circle];\n");
+    
+    // Output formatting
+    fprintf(fp, "\n"); 
 
-	Vertex *startVertex = getVertexLoc(graph, startID);
-    // Enqueue the source vertex
+    // Allocate memory for tracking visited vertices
+    Vertex **tempVisited = malloc(sizeof(Vertex*) * graph->nVertices);
+    if (tempVisited == NULL) {
+        perror("Failed to allocate memory for tempVisited");
+        fclose(fp1);
+        return;
+    }
+    int tempCount = 0;
+
+    // Get the starting vertex
+    Vertex *startVertex = getVertexLoc(graph, startID);
+    if (startVertex == NULL) {
+        fprintf(fp, "Start vertex not found\n");
+        free(tempVisited);
+        fclose(fp1);
+        return;
+    }
+
+    // Enqueue the starting vertex
     enqueue(&q, startVertex);
 
-    //printf("BFS Traversal starting from vertex %s:\n", startVertex->id);
-	
-	while (!isEmpty(&q)){
+    while (!isEmpty(&q)) {
         Vertex *current = dequeue(&q);
-		        
-		if(!current->isVisited){
-			current->isVisited = 1;
-			fprintf(fp, "%s ", current->id);
-			
-			Vertex **sortedAdjacent = sortAdjacent(current);
+        
+        if (!current->isVisited) {
+            current->isVisited = 1;
+            fprintf(fp, "%s ", current->id);
 
-	        for (int i = 0; i <= current->degree - 1; i++){
-	            //Vertex *adjacent = current->edges[i];
-	            if (!sortedAdjacent[i]->isVisited){
-	                enqueue(&q, sortedAdjacent[i]);
-	            }
-			}
-			free(sortedAdjacent);
+            // Sort the adjacent vertices
+            Vertex **sortedAdjacent = sortAdjacent(current);
+            if (sortedAdjacent == NULL) {
+                perror("Failed to sort adjacent vertices");
+                free(tempVisited);
+                fclose(fp1);
+                return;
+            }
+
+            // Process each sorted adjacent vertex
+            for (i = 0; i < current->degree; i++) {
+                Vertex *adj = sortedAdjacent[i];
+                if (!adj->isVisited) {
+                    enqueue(&q, adj);
+
+                    // Check if the adjacent vertex is already in tempVisited
+                    int alreadyExists = 0;
+                    for (j = 0; j < tempCount; j++) {
+                        if (strcmp(tempVisited[j]->id, adj->id) == 0) {
+                            alreadyExists = 1;
+                            break;
+                        }
+                    }
+
+                    if (!alreadyExists) {
+                        // Add to tempVisited and write to DOT file
+                        tempVisited[tempCount++] = adj;
+                        fprintf(fp1, " \"%s\" -> \"%s\";\n", current->id, adj->id);
+                    }
+                }
+            }
+            free(sortedAdjacent);
         }
     }
-    //printf("\n");
+
+    fprintf(fp1, "}\n");
+    fclose(fp1);
+    free(tempVisited);
+    printf("Graph DOT file \"%s\" has been generated.\n", filename);
 }
+

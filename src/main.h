@@ -57,7 +57,7 @@ int isFull(Queue *q);
 void enqueue(Queue *q, Vertex *v);
 Vertex *dequeue(Queue *q);
 Vertex **sortAdjacent(Vertex *vertex);
-void BFS(FILE *fp, Graph *graph, String startID);
+void BFS(FILE *fp, Graph *graph, String startID,const char *filename);
 
 
 //DFS

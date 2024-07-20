@@ -8,7 +8,7 @@ void dfs(FILE *fp, Graph *graph, String startVertex) {
 void traverse(FILE *fp, Graph *graph, Vertex *startVertex) {
     StackOfVertices *stack = initStackOfVertices(graph->nVertices);
     pushVertex(stack, startVertex);
-
+	int i;
     while (!isStackEmpty(stack)) {
         Vertex *currVertex = popVertex(stack);
 
@@ -21,7 +21,7 @@ void traverse(FILE *fp, Graph *graph, Vertex *startVertex) {
             Vertex **sortedNeighbors = sortNeighbors(currVertex);
 
             // Push neighbors to the stack
-            for (int i = currVertex->degree - 1; i >= 0; i--) {
+            for (i = currVertex->degree - 1; i >= 0; i--) {
                 if (!sortedNeighbors[i]->isVisited) {
                     pushVertex(stack, sortedNeighbors[i]);
                 }
@@ -47,7 +47,7 @@ StackOfVertices *initStackOfVertices(int nVertices) {
 Vertex **sortNeighbors(Vertex *vertex) {
     int degree = vertex->degree;
     Vertex **tempArr = (Vertex **)malloc(degree * sizeof(Vertex *));
-    int i;
+    int i,j;
 
     // Copy the original array of vertex pointers to tempArr
     for (i = 0; i < degree; i++) {
@@ -57,7 +57,7 @@ Vertex **sortNeighbors(Vertex *vertex) {
     // Sort the array using selection sort
     for (i = 0; i < degree - 1; i++) {
         int minIndex = i;
-        for (int j = i + 1; j < degree; j++) {
+        for (j = i + 1; j < degree; j++) {
             if (strcasecmp(tempArr[j]->id, tempArr[minIndex]->id) < 0) {
                 minIndex = j;
             }

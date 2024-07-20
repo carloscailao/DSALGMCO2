@@ -18,7 +18,7 @@ int main (void) {
 
     Graph *graph = initGraph(fp);
     fclose(fp);
-
+	generateGraphDotFile(graph, "graph.dot");
     //printGraph(graph);
 
     printf("Input start vertex for the traversal: ");
@@ -31,12 +31,13 @@ int main (void) {
     fp = fopen("TRAVERSALS.TXT", "w");
 
     // Graph printing with degree
-    printGraphDegree(fp, graph);
+	printGraphDegree(fp, graph);
     // traversals here
-    BFS(fp, graph, startVertex);
+    BFS(fp, graph, startVertex,"graphEX3.dot");
+    
     resetVisited(graph);
     dfs(fp, graph, startVertex);
-
+	
     fclose(fp);
 
     free(graph);
