@@ -8,7 +8,7 @@
 #include <ctype.h>
 
 // Definitions here
-#define MAX 100
+#define MAX 25
 #define MAX_CHAR 50
 // Type String can be dynamically allocated
 typedef char *String;
