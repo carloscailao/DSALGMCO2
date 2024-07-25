@@ -1,0 +1,21 @@
+20
+apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+banana apple cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+cherry apple banana date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+date apple banana cherry elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+elderberry apple banana cherry date fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+fig apple banana cherry date elderberry grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+grape apple banana cherry date elderberry fig honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+honeydew apple banana cherry date elderberry fig grape jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+jackfruit apple banana cherry date elderberry fig grape honeydew kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+kiwi apple banana cherry date elderberry fig grape honeydew jackfruit lemon mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+lemon apple banana cherry date elderberry fig grape honeydew jackfruit kiwi mango nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+mango apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon nectarine orange papaya quince raspberry strawberry tangerine kumquat -1
+nectarine apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango orange papaya quince raspberry strawberry tangerine kumquat -1
+orange apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine papaya quince raspberry strawberry tangerine kumquat -1
+papaya apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange quince raspberry strawberry tangerine kumquat -1
+quince apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya raspberry strawberry tangerine kumquat -1
+raspberry apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince strawberry tangerine kumquat -1
+strawberry apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry tangerine kumquat -1
+tangerine apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry kumquat -1
+kumquat apple banana cherry date elderberry fig grape honeydew jackfruit kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine -1

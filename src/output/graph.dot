@@ -1,0 +1,16 @@
+graph MyGraph {
+  node [shape=box];
+  "4OS" -- "The1975";
+  "4OS" -- "Wallows";
+  "ArcticMonkeys" -- "The1975";
+  "ArcticMonkeys" -- "CAS";
+  "Bleachers" -- "The1975";
+  "Bleachers" -- "Wallows";
+  "21Pilots" -- "Wallows";
+  "21Pilots" -- "CAS";
+  "21Pilots" -- "Radiohead";
+  "CAS" -- "The1975";
+  "CAS" -- "Radiohead";
+  "Radiohead" -- "Wallows";
+  "BROCKHAMPTON" -- "Radiohead";
+}

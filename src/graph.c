@@ -71,7 +71,7 @@ Graph *initGraph(FILE *fp) {
         }
     }
 
-    fseek(fp, 1, SEEK_SET); // return to start of vertices (offset by 1 for nVertices)
+    fseek(fp, sizeof(int), SEEK_SET); // return to start of vertices (offset by 1 for nVertices)
 
     // initialize adjacencies
 

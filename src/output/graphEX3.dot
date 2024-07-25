@@ -1,0 +1,11 @@
+digraph MyGraph {
+  node [shape=circle];
+ "4OS" -> "The1975";
+ "4OS" -> "Wallows";
+ "The1975" -> "ArcticMonkeys";
+ "The1975" -> "Bleachers";
+ "The1975" -> "CAS";
+ "Wallows" -> "21Pilots";
+ "Wallows" -> "Radiohead";
+ "Radiohead" -> "BROCKHAMPTON";
+}
