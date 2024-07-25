@@ -3,6 +3,8 @@
 #include "main.h"
 
 void initializeQueue(Queue *q){
+    q->elements = malloc((MAX * 3) * sizeof(Vertex *));
+    q->capacity = MAX * 3;
 	q->size = 0;
 	q->front = -1;
 	q->rear = -1;
@@ -16,7 +18,7 @@ int isEmpty(Queue *q){
 }
 
 int isFull(Queue *q){
-	if(q->rear==MAX-1){
+	if(q->rear==q->capacity - 1){
 		return 1;
 	}
 	return 0;

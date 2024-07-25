@@ -2,11 +2,11 @@
 void dfs(FILE *fp, Graph *graph, String startVertex) {
     //printf("DFS Initialized!\n");
     fprintf(fp, "\n\n"); // output file formatting
-    traverse(fp, graph, getVertexLoc(graph, startVertex));
+    traverse(fp, getVertexLoc(graph, startVertex));
 }
 
-void traverse(FILE *fp, Graph *graph, Vertex *startVertex) {
-    StackOfVertices *stack = initStackOfVertices(graph->nVertices);
+void traverse(FILE *fp, Vertex *startVertex) {
+    StackOfVertices *stack = initStackOfVertices();
     pushVertex(stack, startVertex);
 	int i;
     while (!isStackEmpty(stack)) {
@@ -36,11 +36,11 @@ void traverse(FILE *fp, Graph *graph, Vertex *startVertex) {
     freeStackOfVertices(stack);
 }
 
-StackOfVertices *initStackOfVertices(int nVertices) {
+StackOfVertices *initStackOfVertices() {
     StackOfVertices *newStack = malloc(sizeof(StackOfVertices));
     newStack->top = -1;
-    newStack->vertices = malloc(nVertices * sizeof(Vertex *));
-    newStack->capacity = nVertices;  // Store the capacity of the stack
+    newStack->vertices = malloc((MAX * 3) * sizeof(Vertex *));
+    newStack->capacity = MAX * 3;  // Store the capacity of the stack
     return newStack;
 }
 
@@ -95,6 +95,5 @@ int isStackEmpty(StackOfVertices *stack) {
 }
 
 void freeStackOfVertices(StackOfVertices *stack) {
-    free(stack->vertices);
     free(stack);
 }

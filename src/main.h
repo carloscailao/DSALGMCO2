@@ -8,7 +8,7 @@
 #include <ctype.h>
 
 // Definitions here
-#define MAX 25
+#define MAX 100
 #define MAX_CHAR 50
 // Type String can be dynamically allocated
 typedef char *String;
@@ -29,8 +29,8 @@ typedef struct {
 } Graph;
 
 typedef struct {
-	int size, front, rear;
-	Vertex *elements[MAX];
+	int size, front, rear, capacity;
+	Vertex **elements;
 } Queue;
 
 typedef struct {
@@ -62,8 +62,8 @@ void BFS(FILE *fp, Graph *graph, String startID,const char *filename);
 
 //DFS
 void dfs(FILE *fp, Graph *graph, String startVertex);
-void traverse(FILE *fp, Graph *graph, Vertex *startVertex);
-StackOfVertices *initStackOfVertices(int nVertices);
+void traverse(FILE *fp, Vertex *startVertex);
+StackOfVertices *initStackOfVertices();
 Vertex **sortNeighbors(Vertex *vertex);
 void pushVertex(StackOfVertices *stack, Vertex *vertex);
 Vertex *popVertex(StackOfVertices *stack);

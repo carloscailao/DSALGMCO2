@@ -1,11 +1,22 @@
 digraph MyGraph {
   node [shape=circle];
- "4OS" -> "The1975";
- "4OS" -> "Wallows";
- "The1975" -> "ArcticMonkeys";
- "The1975" -> "Bleachers";
- "The1975" -> "CAS";
- "Wallows" -> "21Pilots";
- "Wallows" -> "Radiohead";
- "Radiohead" -> "BROCKHAMPTON";
+ "tangerine" -> "apple";
+ "tangerine" -> "banana";
+ "tangerine" -> "cherry";
+ "tangerine" -> "date";
+ "tangerine" -> "elderberry";
+ "tangerine" -> "fig";
+ "tangerine" -> "grape";
+ "tangerine" -> "honeydew";
+ "tangerine" -> "jackfruit";
+ "tangerine" -> "kiwi";
+ "tangerine" -> "kumquat";
+ "tangerine" -> "lemon";
+ "tangerine" -> "mango";
+ "tangerine" -> "nectarine";
+ "tangerine" -> "orange";
+ "tangerine" -> "papaya";
+ "tangerine" -> "quince";
+ "tangerine" -> "raspberry";
+ "tangerine" -> "strawberry";
 }
