@@ -1,24 +1,13 @@
-apple      19
-banana     19
-cherry     19
-date       19
-elderberry 19
-fig        19
-grape      19
-honeydew   19
-jackfruit  19
-kiwi       19
-lemon      19
-mango      19
-nectarine  19
-orange     19
-papaya     19
-quince     19
-raspberry  19
-strawberry 19
-tangerine  19
-kumquat    19
+4OS           2
+The1975       4
+ArcticMonkeys 2
+Bleachers     2
+Wallows       4
+21Pilots      3
+CAS           4
+Radiohead     4
+BROCKHAMPTON  1
 
-tangerine apple banana cherry date elderberry fig grape honeydew jackfruit kiwi kumquat lemon mango nectarine orange papaya quince raspberry strawberry 
+21Pilots CAS Radiohead Wallows ArcticMonkeys The1975 BROCKHAMPTON 4OS Bleachers 
 
-tangerine apple banana cherry date elderberry fig grape honeydew jackfruit kiwi kumquat lemon mango nectarine orange papaya quince raspberry strawberry 
+21Pilots CAS ArcticMonkeys The1975 4OS Wallows Bleachers Radiohead BROCKHAMPTON 
