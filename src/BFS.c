@@ -90,18 +90,10 @@ Vertex **sortAdjacent(Vertex *vertex){
     return tempArr;
 }
 
-void BFS(FILE *fp, Graph *graph, String startID, const char *filename) {
+void BFS(FILE *fp, Graph *graph, String startID) {
     Queue q;
     initializeQueue(&q);
     int i, j;
-    FILE *fp1;
-    fp1 = fopen(filename, "w");
-    if (fp1 == NULL) {
-        perror("Failed to open file");
-        return;
-    }
-    fprintf(fp1, "digraph MyGraph {\n");
-    fprintf(fp1, "  node [shape=circle];\n");
     
     // Output formatting
     fprintf(fp, "\n"); 
@@ -110,7 +102,6 @@ void BFS(FILE *fp, Graph *graph, String startID, const char *filename) {
     Vertex **tempVisited = malloc(sizeof(Vertex*) * graph->nVertices);
     if (tempVisited == NULL) {
         perror("Failed to allocate memory for tempVisited");
-        fclose(fp1);
         return;
     }
     int tempCount = 0;
@@ -120,7 +111,6 @@ void BFS(FILE *fp, Graph *graph, String startID, const char *filename) {
     if (startVertex == NULL) {
         fprintf(fp, "Start vertex not found\n");
         free(tempVisited);
-        fclose(fp1);
         return;
     }
 
@@ -139,7 +129,6 @@ void BFS(FILE *fp, Graph *graph, String startID, const char *filename) {
             if (sortedAdjacent == NULL) {
                 perror("Failed to sort adjacent vertices");
                 free(tempVisited);
-                fclose(fp1);
                 return;
             }
 
@@ -161,16 +150,12 @@ void BFS(FILE *fp, Graph *graph, String startID, const char *filename) {
                     if (!alreadyExists) {
                         // Add to tempVisited and write to DOT file
                         tempVisited[tempCount++] = adj;
-                        fprintf(fp1, " \"%s\" -> \"%s\";\n", current->id, adj->id);
                     }
                 }
             }
             free(sortedAdjacent);
         }
     }
-
-    fprintf(fp1, "}\n");
-    fclose(fp1);
     free(tempVisited);
     //printf("Graph DOT file \"%s\" has been generated.\n", filename);
 }
